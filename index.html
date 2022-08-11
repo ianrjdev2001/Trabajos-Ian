@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+    <style type = "text/css"> 
+    /*canvas
+    {
+        background-color: rgb(138, 138, 209);
+    }*/
+    </style>
+</head>
+<body>
+
+    <canvas id="mycanvas" width="500" height="500">Hola el navegador no funciona</canvas>
+    <script>
+        var cv = document.getElementById('mycanvas');
+        var ctx = cv.getContext('2d');
+        /*
+        ctx.fillStyle = "rgb(200,0,0)";
+        ctx.fillRect(10,10,55,50);
+
+        ctx.fillStyle = "rgb(0,0,200,0.5)";
+        ctx.fillRect(30,30,55,50);
+
+        ctx.fillStyle = "rgb(191,88,231)";
+        ctx.fillRect(50,50,55,50);
+        
+       
+        ctx.moveTo(0,0);
+        ctx.lineTo(200,150);
+        ctx.stroke();
+        
+
+        ctx.moveTo(170,200);
+        ctx.lineTo(50,50);
+        ctx.lineTo(170,150);
+        ctx.lineTo(170,200);
+        ctx.strokeStyle = "red";
+        ctx.stroke();
+        ctx.fill();
+        */
+        ctx.beginPath();
+        ctx.arc(200,250,100,0,2*Math.PI);
+        ctx.strokeStyle = "red";
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.arc(400,250,100,0,2*Math.PI);
+        ctx.stroke();
+        ctx.fill();
+
+
+    </script>
+</body>
+</html>
