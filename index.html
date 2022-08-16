@@ -15,42 +15,98 @@
 <body>
 
     <canvas id="mycanvas" width="500" height="500">Hola el navegador no funciona</canvas>
+
+    <img src="peso.png" id="imagen" style="display: none;">
     <script>
         var cv = document.getElementById('mycanvas');
         var ctx = cv.getContext('2d');
+        var color = "red";
+        
+
+
+        
+
+        //Texto
         /*
-        ctx.fillStyle = "rgb(200,0,0)";
-        ctx.fillRect(10,10,55,50);
+        ctx.strokeStyle = "red";
+        ctx.font = "30px Arial";
+        ctx.fillText("Ian Manuel",130,50);
+        ctx.strokeText("Ian Manuelito",130,90)
+        */
+        //Texto
 
-        ctx.fillStyle = "rgb(0,0,200,0.5)";
-        ctx.fillRect(30,30,55,50);
 
-        ctx.fillStyle = "rgb(191,88,231)";
-        ctx.fillRect(50,50,55,50);
+        //Gradiante
+        //ctx.fillStyle = "red";
+        //ctx.fillRect(300,160,160,80);
+        /*
+        var grd = ctx.createLinearGradient(0,0,200,0);
+        grd.addColorStop(0,"red");
+        grd.addColorStop(1,"yellow");
+        ctx.fillStyle = grd;
+        ctx.fillRect(100,100,140,50);
+        */
+
+
+        /*
+        grd = ctx.createRadialGradient(75,50,5,90,60,100);
+        grd.addColorStop(0,"red");
+        grd.addColorStop(0.7,"blue");
+        grd.addColorStop(1,"yellow");
+        ctx.fillStyle = grd;
+        ctx.fillRect(0,0,200,200);
+        */
+        //Gradiante
+
+        //Imagen
+        /*
+        var img = document.getElementById('imagen');
+        ctx.drawImage(img,0,0)
+        */
+        //Imagen
+
+
+        //Eventos click
+        /*
+        cv.addEventListener('click',doClick)
+
+        function doClick()
+        {
+            console.log("Hola")
+        }
+        */
+        function generateRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) 
+        {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+         return color;
+        }
+
         
        
-        ctx.moveTo(0,0);
-        ctx.lineTo(200,150);
-        ctx.stroke();
-        
+        cv.addEventListener('click',function(e){
 
-        ctx.moveTo(170,200);
-        ctx.lineTo(50,50);
-        ctx.lineTo(170,150);
-        ctx.lineTo(170,200);
-        ctx.strokeStyle = "red";
-        ctx.stroke();
-        ctx.fill();
-        */
-        ctx.beginPath();
-        ctx.arc(200,250,100,0,2*Math.PI);
-        ctx.strokeStyle = "red";
-        ctx.stroke();
+            var randomColor=generateRandomColor();
+            console.log(e);
+            ctx.beginPath();
+            ctx.arc(e.offsetX-25,e.offsetY-25,50,0,2*Math.PI);
+            ctx.fillStyle = randomColor;
+            ctx.stroke();
+            ctx.fill();
+        })
         
-        ctx.beginPath();
-        ctx.arc(400,250,100,0,2*Math.PI);
-        ctx.stroke();
-        ctx.fill();
+       
+        cv.addEventListener('mouseover',function(e)
+        {
+            
+            ctx.stroke();
+            ctx.fill();
+        })
+    
+
 
 
     </script>
