@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+    
+    <style type = "text/css"> 
+    canvas
+    {
+        background-color: rgb(64, 207, 255);
+    }
+    </style>
+</head>
+<body>
+
+    <canvas id="mycanvas" width="1000" height="700">Hola el navegador no funciona</canvas>
+
+    <script>
+        var cv = document.getElementById('mycanvas');
+        var ctx = cv.getContext('2d');
+        var fig = 'arc';
+        var press = false;
+
+        //Cabeza
+       
+        
+        //Casa
+        ctx.fillStyle = "rgb(218,206,144)";
+        ctx.fillRect(150,400,400,300);
+        //Ventana
+        ctx.strokeStyle = "rgb(255,0,0)";
+        ctx.strokeRect(200,450,50,50);
+        ctx.stroke();
+
+        ctx.strokeStyle = "rgb(255,0,0)";
+        ctx.strokeRect(250,450,50,50);
+        ctx.stroke();
+
+        ctx.strokeStyle = "rgb(255,0,0)";
+        ctx.strokeRect(200,500,50,50);
+        ctx.stroke();
+
+        ctx.strokeStyle = "rgb(255,0,0)";
+        ctx.strokeRect(250,500,50,50);
+        ctx.stroke();
+
+        //Puerta
+        ctx.strokeStyle = "rgb(255,0,0)";
+        ctx.strokeRect(370,600,50,100);
+        ctx.stroke();
+
+        ctx.strokeStyle = "rgb(255,0,0)";
+        ctx.strokeRect(420,600,50,100);
+        ctx.stroke();
+
+        //Perilla puerta
+        ctx.beginPath();
+        ctx.arc(405,650,10,0,2*Math.PI);
+        ctx.fillStyle = "rgb(251,122,13)";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(435,650,10,0,2*Math.PI);
+        ctx.fillStyle = "rgb(251,122,13)";
+        ctx.fill();
+
+        //Techo
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(255,10,100)";
+        ctx.moveTo(150,400);
+        ctx.lineTo(350,180);
+        ctx.lineTo(550,400);
+        ctx.lineTo(320,400);
+        ctx.fill();
+        //Nube
+        ctx.beginPath();
+        ctx.arc(405,60,40,0,2*Math.PI);
+        ctx.fillStyle = "rgb(255,255,255)";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(450,70,40,0,2*Math.PI);
+        ctx.fillStyle = "rgb(255,255,255)";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(490,100,40,0,2*Math.PI);
+        ctx.fillStyle = "rgb(255,255,255)";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(450,140,40,0,2*Math.PI);
+        ctx.fillStyle = "rgb(255,255,255)";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(400,130,40,0,2*Math.PI);
+        ctx.fillStyle = "rgb(255,255,255)";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(360,103,40,0,2*Math.PI);
+        ctx.fillStyle = "rgb(255,255,255)";
+        ctx.fill();
+        //Troco
+        ctx.fillStyle = "rgb(135,61,2)";
+        ctx.fillRect(740,400,100,300);
+        //Arbol
+        ctx.beginPath();
+        ctx.arc(790,270,200,0,2*Math.PI);
+        ctx.fillStyle = "rgb(0,128,0)";
+        ctx.fill();
+        //Manzanas
+        ctx.beginPath();
+        ctx.arc(650,250,20,0,2*Math.PI);
+        ctx.fillStyle = "rgb(255,0,0)";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(780,150,20,0,2*Math.PI);
+        ctx.fillStyle = "rgb(255,0,0)";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(900,250,20,0,2*Math.PI);
+        ctx.fillStyle = "rgb(255,0,0)";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(780,350,20,0,2*Math.PI);
+        ctx.fillStyle = "rgb(255,0,0)";
+        ctx.fill();
+    </script>
+</body>
+</html>
