@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+    <style type = "text/css"> 
+    /*canvas
+    {
+        background-color: rgb(138, 138, 209);
+    }*/
+    </style>
+</head>
+<body>
+
+    <canvas id="mycanvas" width="500" height="500">Hola el navegador no funciona</canvas>
+
+    <script>
+        var cv = false;
+        var ctx = false;
+        var press = false;
+        var superx = 250;
+        var supery = 250;
+
+        function run()
+        {
+             cv = document.getElementById('mycanvas');
+             ctx = cv.getContext('2d');
+             paint();
+        }
+  /*      
+
+        document.addEventListener('keydown',function(e){
+
+            console.log(e);
+            //arriba
+            if(e.keyCode == 87 || e.keyCode == 38)
+            {
+                supery -=5;
+            }
+            //abajo
+            if(e.keyCode == 83 || e.keyCode == 40)
+            {
+                supery +=5;
+            }
+
+            if(e.keyCode == 65 || e.keyCode == 37)
+            {
+                superx -=5;
+            }
+
+            if(e.keyCode == 68 || e.keyCode == 39)
+            {
+                superx  += 5;
+            }
+        })
+*/
+        function paint()
+        {
+            window.requestAnimationFrame(paint);
+
+            ctx.fillStyle = "pink";
+            ctx.fillRect(0,0,500,500);
+
+            ctx.fillStyle = "red";
+            ctx.fillRect(superx,supery,40,40);
+            superx+=5;
+            if(superx == 500)
+            {
+                superx = 0; 
+            }
+
+        }
+
+        window.requestAnimationFrame = (function ()
+        {
+            return window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            function (callback) 
+            {
+                window.setTimeout(callback, 17);
+            };
+        }());
+
+    
+
+    window.addEventListener('load',run,false);
+
+    function random_rgba()
+    {
+
+    }
+
+
+
+
+    </script>
+</body>
+</html> 
