@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+    
+    <style type = "text/css"> 
+    canvas
+    {
+        background-color: rgb(161, 138, 216);
+    }
+    </style>
+</head>
+<body>
+
+    <canvas id="mycanvas" width="1000" height="700">Hola el navegador no funciona</canvas>
+
+    <script>
+        var cv = document.getElementById('mycanvas');
+        var ctx = cv.getContext('2d');
+        var fig = 'arc';
+        var press = false;
+
+        //Cabeza
+        //cabello
+        ctx.beginPath();
+        ctx.arc(470,150,100,3.1,2*Math.PI);
+        ctx.fillStyle = "rgb(143,56,5)";
+        ctx.fill();
+        //craneo
+        ctx.beginPath();
+        ctx.arc(470,150,90,0,2*Math.PI);
+        ctx.fillStyle = "rgb(253,221,202)";
+        ctx.fill();
+        //ojos
+        ctx.beginPath();
+        ctx.arc(430,130,10,0,2*Math.PI);
+        ctx.fillStyle = "rgb(0,0,0)";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(500,130,10,0,2*Math.PI);
+        ctx.fillStyle = "rgb(0,0,0)";
+        ctx.fill();
+        //boca
+        ctx.beginPath();
+        ctx.arc(460,170,10,0,1*Math.PI);
+        ctx.strokeStyle = "rgb(0,0,0)";
+        ctx.stroke();
+        //Cuello
+        ctx.fillStyle = "rgb(253,221,202)";
+        ctx.fillRect(440,200,55,50);
+        //Cuerpo
+        //torso 
+        ctx.fillStyle = "rgb(0,0,0)";
+        ctx.fillRect(395,250,150,150);
+        //texto
+        ctx.strokeStyle = "rgb(255,255,255)";
+        ctx.font = "20px Arial";
+        ctx.strokeText("Ian Manuel",420,300);
+        //Parte inferior
+        //pelvis
+        ctx.fillStyle = "rgb(255,0,0)";
+        ctx.fillRect(395,400,150,50);
+        //piernas
+        ctx.fillStyle = "rgb(255,0,0)";
+        ctx.fillRect(395,450,60,100);
+
+        ctx.fillStyle = "rgb(255,0,0)";
+        ctx.fillRect(485,450,60,100);
+        //Pies
+        ctx.fillStyle = "rgb(186,121,62)";
+        ctx.fillRect(485,550,70,10);
+
+        ctx.fillStyle = "rgb(186,121,62)";
+        ctx.fillRect(385,550,70,10);
+
+        //Brazos
+        //Derecho
+        ctx.fillStyle = "rgb(0,0,0)";
+        ctx.fillRect(545,260,16,100);
+        ctx.beginPath();
+        ctx.arc(549,262,12,0,2*Math.PI);
+        ctx.fillStyle = "rgb(0,0,0)";
+        ctx.fill();
+        //Mano derecha
+        ctx.beginPath();
+        ctx.arc(554,366,10,0,2*Math.PI);
+        ctx.fillStyle = "rgb(253,221,202)";
+        ctx.fill();
+
+        //izquierdo
+        ctx.fillStyle = "rgb(0,0,0)";
+        ctx.fillRect(380,260,16,100);
+        ctx.beginPath();
+        ctx.arc(392,262,12,0,2*Math.PI);
+        ctx.fillStyle = "rgb(0,0,0)";
+        ctx.fill();
+
+        //Mano izquierda
+        ctx.beginPath();
+        ctx.arc(387,366,10,0,2*Math.PI);
+        ctx.fillStyle = "rgb(253,221,202)";
+        ctx.fill();
+    </script>
+</body>
+</html>
