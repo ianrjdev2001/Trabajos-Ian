@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+</head>
+
+<body>
+    <canvas id="mycanvas" width="500" height="500">
+        Hola tu navegador no funciona
+    </canvas>
+    
+    <script>
+        var cv = null;
+        var ctx = null;
+        var press = false;
+        var superx = 250;
+        var supery = 250;
+        var player = null;
+        var player2 = null;
+        var i = 0;
+        //var pared = null;
+        var multiparedes = [null,null,null,null]; 
+        var direccion = 'right';
+        var score = 0;
+        var speed = 2;
+        var pausa = false;
+        var shark = new Image();
+        var coin = new Image();
+        var audio = new Audio();
+        
+
+        function run()
+        {
+            cv = document.getElementById('mycanvas');
+            ctx = cv.getContext('2d');
+            player = new Cuadro(250,250,40,40,"red");
+            player2 = new Cuadro(getRandomInt(500),getRandomInt(500),40,40,"blue");
+            //pared = new Cuadro(100,100,30,200,"yellow");
+            multiparedes[0] = new Cuadro(100,100,30,200,"yellow");
+            multiparedes[1] = new Cuadro(200,100,30,70,"yellow");
+            multiparedes[2] = new Cuadro(40,300,30,200,"yellow");
+            multiparedes[3] = new Cuadro(330,100,30,200,"yellow");
+
+            shark.src = 'tiburon.png';
+            coin.src = 'moneda.png';
+            audio.src = 'coin-sound.mp3';
+            paint();
+            
+        }
+
+        function paint() 
+        {
+            window.requestAnimationFrame(paint);
+
+            ctx.fillStyle = "green";
+            ctx.fillRect(0,0,500,500);
+
+            ctx.fillStyle = "black";
+            ctx.fillText("SCORE:"+score,10,20);
+            
+            //player.pintar(ctx);
+            ctx.drawImage(shark,player.x,player.y,30,30);
+            //player2.pintar(ctx);
+            ctx.drawImage(coin,player2.x,player2.y,30,30);
+            //pared.pintar(ctx);
+            //multiparedes[0].pintar(ctx);
+            //multiparedes[1].pintar(ctx);
+            //multiparedes[2].pintar(ctx);
+            //multiparedes[3].pintar(ctx);
+            for(i = 0; i < 4; i++)
+            {
+                multiparedes[i].pintar(ctx);
+            }
+            if(pausa)
+            {
+                ctx.fillStyle = "rgb(0,0,0,0.5)";
+                ctx.fillRect(0,0,500,590);
+
+                ctx.fillStyle = "black";
+                ctx.fillText("PAUSE",230,230);
+            }
+            else
+            {
+                update();
+            }
+        }
+
+        function update()
+        {
+            //arriba
+            if(direccion =='up')
+            {
+                player.y -= speed;
+                if(player.y <= 0)
+                {
+                    player.y = 500;
+                }
+            }
+            //abajo
+            if(direccion == 'down') 
+            {
+                player.y += speed;
+                if(player.y >= 500)
+                {
+                    player.y = 0;
+                }
+            }
+            //izquierda
+            if (direccion == 'left') 
+            {
+                player.x -= speed;
+                if(player.x <= 0)
+                {
+                    player.x = 500;
+                }
+            }
+            //derecha
+            if (direccion == 'right') 
+            {
+                player.x += speed;
+                if(player.x >= 500)
+                {
+                    player.x = 0;
+                }
+                
+            }
+
+            if(player.se_tocan(player2))
+            {
+                player2.x = getRandomInt(500);
+                player2.y = getRandomInt(500);
+
+                score += 5;
+                speed += 2;
+                audio.play();
+            }
+
+            if(player.se_tocan(multiparedes[0]) || player.se_tocan(multiparedes[1]) || player.se_tocan(multiparedes[2]) || player.se_tocan(multiparedes[3]))
+            {
+                //speed = 0;
+                if(direccion =='up')
+                {
+                    player.y += speed;
+                
+                }
+                //abajo
+                if(direccion == 'down') 
+                {
+                    player.y -= speed;
+                
+                }
+                //izquierda
+                if(direccion == 'left') 
+                {
+                    player.x += speed;
+                
+                }
+                //derecha
+                if(direccion == 'right') 
+                {
+                    player.x -= speed;
+                
+                }
+            }
+            
+        }
+
+        function Cuadro(x,y,w,h,c)
+        {
+            this.x = x;
+            this.y = y;
+            this.w = w;
+            this.h = h;
+            this.c = c;
+
+            this.se_tocan = function (target) 
+            { 
+                if(this.x < target.x + target.w &&
+                this.x + this.w > target.x && 
+                this.y < target.y + target.h && 
+                this.y + this.h > target.y)
+                {
+                    return true;
+                    console.log("Hola");
+                }
+            };
+
+            this.pintar = function(ctx)
+            {
+                ctx.fillStyle = this.c;
+                ctx.fillRect(this.x,this.y,this.w,this.h);
+                ctx.strokeRect(this.x,this.y,this.w,this.h);
+            }
+        }
+
+        window.requestAnimationFrame = (function () 
+        {
+            return window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                function (callback) {
+                    window.setTimeout(callback, 17);
+                };
+        }());
+
+        document,addEventListener('keydown', function(e)
+        {
+            //arriba
+            if (e.keyCode == 87 || e.keyCode == 38) 
+            {
+                direccion = 'up';
+            }
+            //abajo
+            if (e.keyCode == 83 || e.keyCode == 40) 
+            {
+                direccion = 'down';
+            }
+            //izquierda
+            if (e.keyCode == 65 || e.keyCode == 37) 
+            {
+                direccion = 'left';
+            }
+            //derecha
+            if (e.keyCode == 68 || e.keyCode == 39) 
+            {
+                direccion = 'right';
+            }
+
+            if (e.keyCode == 32) 
+            {
+                pausa = (pausa)?false:true;
+            } 
+        });
+
+
+
+        
+        window.addEventListener('load',run,false); 
+
+        function getRandomInt(max) 
+        {
+            return Math.floor(Math.random() * max);
+        }
+
+    </script>
+</body>
+</html>
