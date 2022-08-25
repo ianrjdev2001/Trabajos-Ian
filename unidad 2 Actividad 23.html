@@ -20,6 +20,7 @@
         var supery = 250;
         var player = null;
         var player2 = null;
+        var i = 0;
         //var pared = null;
         var multiparedes = [null,null,null,null]; 
         var direccion = 'right';
@@ -58,10 +59,15 @@
             player.pintar(ctx);
             player2.pintar(ctx);
             //pared.pintar(ctx);
-            multiparedes[0].pintar(ctx);
-            multiparedes[1].pintar(ctx);
-            multiparedes[2].pintar(ctx);
-            multiparedes[3].pintar(ctx);
+            //multiparedes[0].pintar(ctx);
+            //multiparedes[1].pintar(ctx);
+            //multiparedes[2].pintar(ctx);
+            //multiparedes[3].pintar(ctx);
+
+            for(i = 0; i < 4; i++)
+            {
+                multiparedes[i].pintar(ctx);
+            }
             if(pausa)
             {
                 ctx.fillStyle = "rgb(0,0,0,0.5)";
