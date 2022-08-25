@@ -20,8 +20,8 @@
         var supery = 250;
         var player = null;
         var player2 = null;
-        var pared = null;
-        var multiparedes = [null,null]; 
+        //var pared = null;
+        var multiparedes = [null,null,null,null]; 
         var direccion = 'right';
         var score = 0;
         var speed = 2;
@@ -35,7 +35,7 @@
             ctx = cv.getContext('2d');
             player = new Cuadro(250,250,40,40,"red");
             player2 = new Cuadro(getRandomInt(500),getRandomInt(500),40,40,"blue");
-            pared = new Cuadro(100,100,30,200,"yellow");
+            //pared = new Cuadro(100,100,30,200,"yellow");
             multiparedes[0] = new Cuadro(100,100,30,200,"yellow");
             multiparedes[1] = new Cuadro(200,100,30,70,"yellow");
             multiparedes[2] = new Cuadro(40,300,30,200,"yellow");
