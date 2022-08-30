@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue js</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <div id = "contenedor">
+
+        <ol>
+            <li v-for="item in chamacos">
+                {{item.name}} : <span>{{item.role}}</span>
+            </li>   
+        </ol>
+
+        <input type="text" v-model="chamaco_name">
+        <input type="text" v-model="chamaco_role">
+        <button @click = "agregar_chamacos">Agregar</button>
+
+        <h1>
+            {{name}}
+            
+        </h1>
+        <h2>
+            {{lastname}}
+        </h2>
+        <input type="text" v-model="num1" name="">
+        <input type="text" v-model="num2" name="">
+        <hr>
+        <h2>
+            {{result}}
+        </h2>
+        <button @click = "suma">Clicl me</button>
+    </div>
+    <script type="text/javascript">
+        const { createApp } = Vue
+      
+        createApp({
+          data()
+          {
+            return {
+              name: 'Ian Manuel',
+              lastname: 'Rodriguez Jacinto',
+              num1: '',
+              num2: '',
+              result: '',
+              chamacos:[
+                {name: 'angel', role: 'front'}]
+              }
+          },methods:{
+            saludar(){
+                alert('hola')
+            }
+          },methods:
+          {
+            suma(){
+                this.result = parseInt(this.num1) + parseInt(this.num2)
+            }
+          },methods:
+          {
+            agregar_chamacos(){
+             this.chamacos.push({name: this.chamaco_name,role: this.chamaco_role});
+            }
+          }
+        }).mount('#contenedor')
+      </script>
+      
+</body>
+</html>
