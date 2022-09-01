@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue js</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <div id = "contenedor">
+        <form>
+            <fieldset>
+              <legend>
+                Acceso Al panel
+              </legend>
+              <label>
+                Correo Electronico
+              </label>
+              <input type="email" v-model = "email" name="">
+              <label>
+               Password
+              </label>
+              <input type="password" v-model = "password" name="">
+              <button @click = "login">Acceder</button>
+
+            </fieldset>
+
+        </form>
+        
+    </div>
+    <script type="text/javascript">
+        const { createApp } = Vue
+      
+        const data = null;
+        const error = null;
+
+        
+      const app = createApp({
+          data()
+          {
+            return {
+              user:'',
+              email:'',
+              password:''
+
+              }
+          },methods:
+          {
+            login(e)
+            {
+              e.preventDefault();
+              var email_user = this.email;
+              var password_user = this.password;
+
+              var access = this.user.map(function(u){
+                if(email_user === u.email.toLowerCase())
+                {
+                  if(password_user === u.password)
+                  {
+                    alert("Acceso Correcto");
+                    return true;
+                  }
+                }
+                console.log(access);
+                alert("Datos Incorrectos");
+              })
+            }
+          },mounted(){
+            //fetch('https://jsonplaceholder.typicode.com/users')
+            fetch('users.json')
+            .then((res) => res.json())
+            .then((json) => (this.user = json))
+            .then((err) => (console.log(err)))
+          }
+        }).mount('#contenedor')
+        
+      </script>
+      
+</body>
+</html>
