@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registros</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <link rel="stylesheet" href="css/diseño.css">
+</head>
+<body>
+    <div id="contenedor">    
+        <table class="tabla-registro">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+            </tr>
+            <tr v-for="item in users">
+                <td scope="row">{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.username }}</td>
+                <td>{{ item.email }}</td>
+            </tr>  
+        </table>        
+        <br>
+        <div class="añadir-nuevo">
+            <label for="">Nombre</label><br>
+            <input type="text" v-model="name"><br>
+            <label for="">Usuario</label><br>
+            <input type="text" v-model="user"><br>
+            <label for="">Email</label><br>
+            <input type="email" v-model="email"><br>
+            <br>
+            <button @click="add">Agregar usuario</button>
+        </div>
+    </div>
+    <script type="text/javascript">
+        if (window.sessionStorage) 
+        {
+            var nombre = sessionStorage.getItem("username");
+            console.log(nombre);
+        }
+        const {createApp} = Vue;
+    
+        const app = createApp({
+            data() 
+            {
+                return {
+                    users : null,
+                    name : '',
+                    user : '',
+                    email : '',
+                    address : '',
+                }
+            },
+            methods: 
+            {
+                add()
+                {
+                    this.users.push({id:this.users.length+1,name:this.name, username:this.user, email:this.email}),
+                    this.name = '',
+                    this.user = '',
+                    this.email = ''
+                }
+            },
+            mounted()
+            {
+                fetch('user.json')
+                  .then((res) => res.json())
+                  .then((json) => this.users = json)
+                  .catch((error) => console.log(error))
+            }
+    
+        }).mount('#contenedor')
+    
+    </script>
+</body>
+</html>
