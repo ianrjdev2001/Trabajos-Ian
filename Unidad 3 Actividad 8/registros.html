@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Registros</title>
+	<script src="https://unpkg.com/vue@3"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="css/diseño.css">
+</head>
+
+<body>
+	<div id="contenedor">
+		<div v-if="tableview">
+			<br/>
+			<button @click="add">Add</button>
+			<br/><br/>
+			<table class="tabla-registros">
+			    <tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Username</th>
+					<th>Email</th>
+					<th>City</th>
+                    <th>Actions</th>
+				</tr>
+				<tr v-for="(user, id) in users" :key="user.id">
+					<td scope="row">{{ user.id }}</td>
+					<td>{{ user.name }}</td>
+					<td>{{ user.username }}</td>
+					<td>{{ user.email }}</td>
+                    <td>{{ user.address.city}}</td>
+					<td>
+						<button @click="edit(id)">Edit</button>
+						<button @click="removeUser(user.id)">Remove</button>
+					</td>
+				</tr>
+			</tr>
+			</table>
+		</div>
+		<div v-if="tableview == false">
+			<div  class="formulario-editar">
+                <h2 v-if="action">Add User</h2>
+                <h2 v-if="action == false">Edit User</h2>
+				<form>
+					<div>
+						<div>
+							<label>Name</label>
+                            <br>
+							<input type="text" v-model="userData.name" />
+						</div>
+						<div>
+							<label>Username</label>
+                            <br>
+							<input type="text" v-model="userData.username" />
+						</div>
+					</div>
+					<div>
+						<div>
+							<label>Email</label>
+                            <br>
+							<input type="text" v-model="userData.email" />
+						</div>
+					</div>
+					<div>
+						<div>
+							<label>City</label>
+                            <br>
+							<input type="text" v-model="userData.address.city" />
+						</div>
+					</div>
+                    <br>
+					<button @click="save" v-if="action">Add</button>
+					<button @click="update" v-if="action == false">Update</button>
+					<button @click="cancel">Cancel</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		if (window.sessionStorage) 
+        {
+			var nombre = sessionStorage.getItem("username");
+			console.log(nombre);
+		}
+		const { createApp } = Vue;
+
+		const app = createApp(
+        {
+			data() 
+            {
+				return {
+					users: null,
+					tableview: true,
+					lastId: 10,
+					action: true,
+                    idUser: null,
+					userData: {
+						id: null,
+						name: '',
+						username: '',
+						email: '',
+						address: {
+							city: ''
+						},
+					},
+				};
+			},
+			methods: 
+            {
+				save() 
+                {
+					this.users.push(this.userData),
+					this.clearuserData();
+				},
+				cancel() 
+                {
+					this.clearuserData();
+				},
+				edit(id) 
+                {
+					this.tableview = false;
+					this.action = false;
+					this.idUser = id;
+					this.userData = 
+                    {
+						id: this.users[id].id,
+						name: this.users[id].name,
+						username: this.users[id].username,
+						email: this.users[id].email,
+						address: {
+							city: this.users[id].address.city
+						},
+					};
+				},
+				update()
+                {
+					this.users[this.idUser] = this.userData;
+					console.log('hola')
+					this.clearuserData();
+				},
+				removeUser(id) 
+                {
+					Swal.fire
+                    (
+                    {
+						title: "¿Esta seguro de eliminar?",
+						icon: "warning",
+						showCancelButton: true,
+						confirmButtonColor: "red",
+						cancelButtonColor: "blue",
+						confirmButtonText: "Si, eliminar",
+					}).then((removeUser) => 
+                    {
+						if (removeUser.isConfirmed) 
+                        {
+							Swal.fire("Eliminado", "El usuario fue eliminado.", "success");
+                            this.users = this.users.filter((user) => user.id !== id);
+						}
+					});
+				},
+				clearuserData() 
+                {
+					this.tableview = true;
+					this.userData =
+                    {
+						id: null,
+						name: '',
+						username: '',
+						email: '',
+						password: '',
+						phone: '',
+						website: '',
+						address:
+                        {
+							city: ''
+						},
+					};
+				},
+				add() 
+                {
+					this.tableview = false;
+					this.action = true;
+					this.userData.id = this.lastId + 1;
+				},
+			},
+			mounted() 
+            {
+				fetch("user.json")
+					.then((res) => res.json())
+					.then((json) => (this.users = json))
+					.catch((error) => console.log(error));
+			},
+		}).mount("#contenedor");
+	</script>
+</body>
+
+</html>

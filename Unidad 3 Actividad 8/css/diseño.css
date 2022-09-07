@@ -1,0 +1,63 @@
+.formulario
+{
+    height: 220px;
+    width: 220px;
+    background-color: #F0F2F5;
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px;
+    border: 2px solid rgb(0,0,0);  
+}
+
+button
+{
+    width: 100px;
+}
+
+.tabla-registro
+{
+    height: 420px;
+    width: 420px;
+    background-color: #F0F2F5;
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px;
+    border: 2px solid rgb(0,0,0);  
+}
+
+.añadir-nuevo
+{
+    height: 200px;
+    width: 220px;
+    background-color: #F0F2F5;
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px;
+    border: 2px solid rgb(0,0,0);  
+}
+td
+{
+    border: 1px solid rgb(0,0,0);  
+}
+
+.formulario-editar
+{
+    height: 320px;
+    width: 220px;
+    background-color: #F0F2F5;
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px;
+    border: 2px solid rgb(0,0,0);
+}
+
+.tabla-registros
+{
+    height: 320px;
+    width: 220px;
+    background-color: #F0F2F5;
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px;
+    border: 2px solid rgb(0,0,0);
+}

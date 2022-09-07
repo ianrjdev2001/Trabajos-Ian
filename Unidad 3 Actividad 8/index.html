@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="css/diseño.css">
+</head>
+<body>
+    <div id="contenedor" class="formulario">
+        <form>
+            <legend>Login</legend>
+            <br>
+            <label for="">Correo electronico</label>
+            <br><br>
+            <input type="email" v-model="email" name="" placeholder="Correo Electronico">
+            <br><br>
+            <label for="">Password</label>
+            <br><br>
+            <input type="password" v-model="password" name="" placeholder="Password">
+            <br><br>
+            <button @click="login">Ingresar</button>    
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        const { createApp } = Vue;
+        const app = createApp({
+            data() {
+                return {
+                    users: null,
+                    email: '',
+                    password: ''
+
+                }
+            },
+            methods: 
+            {
+                login(e)
+                {
+                    e.preventDefault();
+                    var username;
+                    var email_user = this.email;
+                    var password_user = this.password;
+                    var access = this.users.map(function(u)
+                    {
+                        if (email_user.toLowerCase() == u.email.toLowerCase()) 
+                        {
+                            if(password_user === u.password) 
+                            {
+                                username = u.username;
+                                //swal("Bienvenido "+username);
+                                alert("Bienvenido "+username);
+                                sessionStorage.setItem("username", username);
+                                location.href = 'registros.html';
+                            }
+                        }
+                    })
+                    console.log(access);
+                }
+            },
+            mounted()
+            {
+                fetch('user.json')
+                    .then((res) => res.json())
+                    .then((json) => (this.users = json ))
+                    .catch((err) => (console.log(err) ))
+            }
+        }).mount('#contenedor');
+    </script>
+</body>
+</html>
