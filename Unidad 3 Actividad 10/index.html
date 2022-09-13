@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="css/diseño.css">
+</head>
+<body>
+    <div id="contenedor" class="formulario">
+        <form>
+            <legend>Login</legend>
+            <br>
+            <label for="">Correo electronico</label>
+            <br><br>
+            <input type="email" v-model="email" name="" placeholder="Correo Electronico">
+            <br><br>
+            <label for="">Password</label>
+            <br><br>
+            <input type="password" v-model="password" name="" placeholder="Password">
+            <br><br>
+            <button @click="login">Ingresar</button>    
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        const { createApp } = Vue;
+        const app = createApp({
+            data() {
+                return {
+                    users: null,
+                    email: '',
+                    password: ''
+
+                }
+            },
+            methods: 
+            {
+                login(e)
+                {
+                    e.preventDefault();
+                    var data = new FormData();
+                    data.append('username', this.email);//ian_dev
+                    data.append('password', this.password);//El-3ev-99
+                    data.append('request_token', '');
+
+                    var config = 
+                    {
+                        method: 'post',
+                        url: 'https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=8bf31e57a4c4eff6668908a8dc882b5f',
+                        headers: 
+                        { 
+                        },
+                        data : data
+                    };
+                    var username = this.email
+                    axios(config)
+                    .then(function (response) 
+                    {
+                        if(response.data.success)
+                        {
+                            localStorage.setItem("nombre", username);
+                            location.href = 'peliculasRegistro.html';
+                        }
+                        console.log(JSON.stringify(response.data));
+                    })
+                    .catch(function (error) 
+                    {
+                        console.log(error);
+                    });
+                }
+            },
+            mounted()
+            {        
+            }
+        }).mount('#contenedor');
+    </script>
+</body>
+</html>

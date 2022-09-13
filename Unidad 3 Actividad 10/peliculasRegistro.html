@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Registros</title>
+	<script src="https://unpkg.com/vue@3"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="css/diseño.css">
+</head>
+
+<body>
+    <div id="contenedor">
+        <div v-if = "mostrardetallespeli" class="lista-detalles">
+            <button @click="cerrarDetalles">Cerrar Detalles</button>
+            <br>
+            <img :src="'https://image.tmdb.org/t/p/w200'+detalles.poster_path" alt="">
+            <br>
+            <label>Titulo - </label>
+            <label>{{detalles.title}}</label>
+            <br>
+            <label>Idioma Original - </label>
+            <label>{{detalles.original_language}}</label>
+            <br>
+            <br>
+            <button class="btn-decrementa" @click="decrementarvalor">-</button>
+            <label>{{valor}}</label>
+            <button class="btn-incrementa" @click="incrementarvalor">+</button>
+            <br>
+            <br>
+            <button @click="valuar">Valuar</button>
+            <br>
+            <br>
+            <button @click="borrarvaluar">Borrar Valoracion</button>
+        </div>
+        <div v-else> 
+            <h2>{{user}}</h2>
+            <div v-for = "peli in peliculas" class="lista-peliculas">
+                <img :src="'https://image.tmdb.org/t/p/w200'+peli.poster_path" alt="">
+                <br>
+                <label>Titulo - </label>
+                <label>{{peli.title}}</label>
+                <br>
+                <button @click="details(peli)">Detalles</button>
+            </div>
+        </div>
+    </div>
+
+	<script type="text/javascript">
+
+		const { createApp } = Vue;
+    const app = createApp(
+    {
+        data()
+        {
+            return{
+                id: 0,
+                user:localStorage.getItem("nombre"),
+                peliculas:[],
+                mostrardetallespeli: false,
+                detalles:[{id:"",title:"",original_language:"",poster_path:""}],
+                valor: 5
+            }
+        },
+        methods:
+        {
+            details(id)
+            {
+                this.id = id.id;
+                this.detalles.id = id.id;
+                this.detalles.title = id.title;
+                this.detalles.original_language = id.original_language;
+                this.detalles.poster_path = id.poster_path;
+                this.mostrardetallespeli =  true;
+            },
+            cerrarDetalles()
+            {
+                this.mostrardetallespeli =  false;
+            },
+        
+        decrementarvalor()
+        {
+            this.valor--;
+            if(this.valor <= 0)
+            {
+                this.valor = 0;
+            }
+        },
+        incrementarvalor()
+        {
+            this.valor++;
+            if(this.valor >= 10)
+            {
+                this.valor = 10;
+            }
+            
+        },
+        valuar()
+        {
+            var data = new FormData();
+            data.append('value', this.valor);
+
+            var config = 
+            {
+                method: 'post',
+                url: 'https://api.themoviedb.org/3/movie/'+this.id+'/rating?api_key=8bf31e57a4c4eff6668908a8dc882b5f',
+                headers: 
+                { 
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YmYzMWU1N2E0YzRlZmY2NjY4OTA4YThkYzg4MmI1ZiIsInN1YiI6IjYzMWRiNTllY2U5ZTkxMDA3Y2NmNTBjZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.dH5sCbNDklvrsoLQTwRI6UdOqwpDp0N1b6q3TAHsm8o',     
+                },
+                data : data
+            };
+            axios(config)
+            .then(function (response) 
+            {
+                alert("A sido evaluado exitosamente");
+                console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) 
+            {
+                console.log(error);
+            });
+        },
+        borrarvaluar()
+        {
+            var config = {
+            method: 'delete',
+            url: 'https://api.themoviedb.org/3/movie/'+this.id+'/rating?api_key=8bf31e57a4c4eff6668908a8dc882b5f',
+            headers: 
+            { 
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YmYzMWU1N2E0YzRlZmY2NjY4OTA4YThkYzg4MmI1ZiIsInN1YiI6IjYzMWRiNTllY2U5ZTkxMDA3Y2NmNTBjZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.dH5sCbNDklvrsoLQTwRI6UdOqwpDp0N1b6q3TAHsm8o'
+            }
+            };
+
+            axios(config)
+            .then(function (response) 
+            {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) 
+            {
+                console.log(error);
+            });
+
+        }
+    },
+        mounted()
+        {
+            var self = this;
+            var config = 
+            {
+            method: 'get',
+            url: 'https://api.themoviedb.org/3/movie/popular?api_key=8bf31e57a4c4eff6668908a8dc882b5f&language=en-US&page=1',
+                headers: 
+                { 
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YmYzMWU1N2E0YzRlZmY2NjY4OTA4YThkYzg4MmI1ZiIsInN1YiI6IjYzMWRiNTllY2U5ZTkxMDA3Y2NmNTBjZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.dH5sCbNDklvrsoLQTwRI6UdOqwpDp0N1b6q3TAHsm8o'
+                }
+            };
+
+            axios(config)
+            .then(function (response) 
+            {
+                self.peliculas = response.data.results;
+                console.log(JSON.stringify(response.data.results));
+            })
+            .catch(function (error) 
+            {
+                console.log(error);
+            });
+            console.log(self.peliculas);
+        }
+        }).mount("#contenedor")
+	</script>
+</body>
+
+</html>
