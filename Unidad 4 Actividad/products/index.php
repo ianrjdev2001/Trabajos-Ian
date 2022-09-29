@@ -95,12 +95,11 @@
                             <span class="input-group-text" id="basic-addon1">@</span>
                             <input type="text" name="brand_id" class="form-control" placeholder="brand id" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
-                    
                 </div>
                 <input type="hidden" name="action" value="create">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
             </form>
             </div>
