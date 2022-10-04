@@ -160,7 +160,7 @@
             var bodyFormData = new FormData();
             bodyFormData.append('id', id);
             bodyFormData.append('action', 'delete');
-            axios.post('../app/ProductsController.php', bodyFormData)
+            axios.post('../app/ProductosController.php', bodyFormData)
             .then(function (response) {
                 console.log(response);
                 location.reload();
