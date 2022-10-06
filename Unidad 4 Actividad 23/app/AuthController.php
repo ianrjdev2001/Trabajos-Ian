@@ -1,5 +1,6 @@
 <?php
 include_once "config.php";
+//echo "hola";
 
 if (isset($_POST['action'])) 
 {
