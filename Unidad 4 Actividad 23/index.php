@@ -31,7 +31,7 @@
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Temporibus, fugiat. Obcaecati enim laborum, quod minus illum at dolore repudiandae asperiores distinctio quo dolorum veritatis animi excepturi expedita praesentium quaerat illo.
                     </p>
                     <!--form action="products/index.php" class="form"-->
-                    <form method="post" action="auth" class="form">
+                    <form method="post" action="<?= BASE_PATH?>auth" class="form">
                         <div>
                             <label for="">Correo electrónico</label>
                             <div class="input-group mb-3">
