@@ -3,3 +3,6 @@ RewriteEngine on
 
 #Rutas
 RewriteRule ^auth$ app/AuthController.php
+
+RewriteRule ^prod$ app/ProductosController.php
+RewriteRule ^prod/([a-zA-Z0-9-]*)$ products/detalles.php?slug=$1

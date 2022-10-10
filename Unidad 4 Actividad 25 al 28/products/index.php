@@ -49,7 +49,7 @@
                             <div class="row">
                                 <a data-product='<?php echo json_encode($lista)?>' onclick="editProduct(this)" class="btn btn-warning col-6" data-bs-toggle="modal" data-bs-target="#añadirModal">Editar</a>
                                 <a class="btn btn-danger col-6" onclick="remove(<?php echo $lista->id ?>)">Eliminar</a>
-                                <a href="detalles.php?slug=<?php echo $lista->slug ?>" class="btn btn-info col-12">Detalles</a>
+                                <a href="<?= BASE_PATH."prod/".$lista->slug ?>" class="btn btn-info col-12">Detalles</a>
                             </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form method ="post" action="../app/ProductosController.php" enctype ="multipart/form-data">
+            <form method ="post" action="<?= BASE_PATH?>prod" enctype ="multipart/form-data">
                 <div class="modal-body">        
                     
                         <div class="input-group mb-3">
@@ -181,7 +181,9 @@
             bodyFormData.append('id', id);
             bodyFormData.append('action', 'delete');
             bodyFormData.append('global_token', '<?=$_SESSION['global_token'] ?>');
-            axios.post('../app/ProductosController.php', bodyFormData)
+            
+            //axios.post('../app/ProductosController.php', bodyFormData)
+            axios.post('<?= BASE_PATH?>prod', bodyFormData)
             .then(function (response) {
                 console.log(response);
                 location.reload();

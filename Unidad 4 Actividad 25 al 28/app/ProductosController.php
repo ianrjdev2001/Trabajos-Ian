@@ -118,11 +118,13 @@ Class ProductosController
 
         if( isset($response->code) &&  $response->code > 0) 
         {
-            header ("Location:../products?success=true");
+            header ("Location:".BASE_PATH."products?success=true");
+            //header ("Location:../products?success=true");
+            
         } 
         else
         {
-            header ("Location:../products?error=true");
+            header ("Location:".BASE_PATH."products?error=true");
         }
     }
 
@@ -215,10 +217,13 @@ Class ProductosController
         curl_close($curl);
         //echo $response;
         $response = json_decode($response);
-        if( isset($response->code) &&  $response->code > 0) {
-            header ("Location:../products?success=true");
-        } else {
-            header ("Location:../products?error=true");
+        if( isset($response->code) &&  $response->code > 0) 
+        {
+            header ("Location:".BASE_PATH."/products?success=true");
+        } 
+        else 
+        {
+            header ("Location:".BASE_PATH."/products?error=true");
         }
     }
 
