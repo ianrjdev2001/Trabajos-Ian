@@ -1,0 +1,5 @@
+Options +FollowSymLinks -MultiViews
+RewriteEngine on
+
+#Rutas
+RewriteRule ^auth$ app/AuthController.php
