@@ -25,6 +25,10 @@ Route::get('/', function () {
     echo "Hola ".$name;
 });*/
 
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+
 Route::get('clients/create',[ClientController::class,'create']);
 
 Route::post('clients',[ClientController::class,'store']);
