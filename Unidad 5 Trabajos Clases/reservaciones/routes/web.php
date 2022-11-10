@@ -17,9 +17,15 @@ use App\Http\Controllers\ReservationController;
 |
 */
 
+//Rutas Maquetacion del proyecto
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('home', function () {
+    return view('home');
+});
+//Rutas Maquetacion del proyecto
 
 /*Route::get('saludo/{name}', function ($name) {
     echo "Hola ".$name;
